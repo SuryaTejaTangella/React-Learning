@@ -7,6 +7,7 @@ export const ContactForm = () => {
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" />
             <br />
+            <button typ="submit">Submit</button>
         </form>
     )
     ;
