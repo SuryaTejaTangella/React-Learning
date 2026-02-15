@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # React App (deployed by self-hosted runner)
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: react-app-prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge
