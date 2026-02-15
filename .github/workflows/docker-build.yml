@@ -90,6 +90,7 @@ jobs:
 
     steps:
       - name: Stop running container
+        shell: bash
         run: |
           docker stop react-app-prod 2>/dev/null || true
           docker rm react-app-prod 2>/dev/null || true
