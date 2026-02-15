@@ -99,11 +99,12 @@ jobs:
         run: docker pull ${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Deploy to local Docker
+        shell: cmd
         run: |
-          docker run -d \
-            --name react-app-prod \
-            -p 3000:3000 \
-            --restart unless-stopped \
+          docker run -d ^
+            --name react-app-prod ^
+            -p 3000:3000 ^
+            --restart unless-stopped ^
             ${{ env.REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Verify deployment
